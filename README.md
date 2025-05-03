@@ -1,10 +1,10 @@
 # NASA-NEO-Project
 NASA Near-Earth Object (NEO) Tracking &amp; Insights using Public API
 
-# Domain 
+## Domain 
 Space Research & Astronomical Data Analysis
 
-## Project Approach
+### Project Approach
 1. Getting the NASA API Key.
 2. Extraction of 10,000 asteroid records using NASA API with proper pagination.
 3. Transformed JSON data with only the required fields for analysis.
@@ -12,7 +12,7 @@ Space Research & Astronomical Data Analysis
 5. Automated SQL table creation and data insertion using Python.
 6. A fully functional Streamlit dashboard.
 
-## Skills Developed 
+### Skills Developed 
 1. API Integration and JSON Parsing
 2. Data Transformation 
 3. Relational Database (SQL) Table Creation and Insertion
