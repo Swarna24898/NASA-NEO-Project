@@ -219,6 +219,8 @@ query_map = {
     SELECT DISTINCT orbiting_body FROM close_approach;"""
     }
 
+sql_query = query_map.get(selected_query)
+
 # Filters
 
 st.sidebar.header("Filter asteroid data")
@@ -254,11 +256,14 @@ WHERE B.close_approach_date BETWEEN '{close_approach_start_date}' AND '{close_ap
   AND A.is_potentially_hazardous_asteroid = {hazardous_state}
 """
 
-sql_query = query_map.get(selected_query)
- # Rebuild sql_query with filters
-# sql_query = base_query.strip() + "\n" + filters + "\nORDER BY B.close_approach_date DESC LIMIT 1000"
 
+final_query = base_query + filters
 
+else:
+    final_query = sql_query
+
+# Determine which query to run
+query_to_run = final_query if selected_query == "Show all columns from both tables" else sql_query
 
 video_file = open("C:/Users/HP/Downloads/NEO Animation.mp4", "rb")
 video_bytes = video_file.read() 
@@ -272,6 +277,7 @@ try:
     result = cursor.fetchall()
     st.write (cursor.description)
     df = pd.DataFrame (result,columns = [i[0] for i in cursor.description])
+    df.drop_duplicates(inplace=True)
     st.subheader("Query Result")
     st.dataframe(df)
 
